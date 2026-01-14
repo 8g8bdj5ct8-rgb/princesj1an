@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Special for Princess</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --pink-soft: #ffc0cb; 
+            --pink-medium: #ffb6c1; 
+            --pink-bold: #d02e77; 
+            --bg-gradient: linear-gradient(180deg, #ffe4e1 0%, #ffdbd8 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            background: var(--bg-gradient); 
+            font-family: 'Quicksand', sans-serif; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
+        }
+        .container { width: 90%; max-width: 400px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+        /* ANIMASI AMPLOP CSS */
+        .envelope-wrapper {
+            position: relative; width: 220px; height: 140px; background: white;
+            box-shadow: 0 10px 30px rgba(208, 46, 119, 0.15); transition: 1s; border-radius: 0 0 10px 10px;
+        }
+        .envelope-wrapper::before {
+            content: ""; position: absolute; top: 0; left: 0;
+            border-left: 110px solid transparent; border-right: 110px solid transparent;
+            border-top: 90px solid var(--pink-medium); transform-origin: top; transition: 1.5s; z-index: 2;
+        }
+        .envelope-wrapper.open::before { transform: rotateX(180deg); z-index: 0; }
+        .envelope-wrapper.fade-out { opacity: 0; transform: scale(1.3); pointer-events: none; }
+
+        /* PASSWORD GATE */
+        #password-gate { display: none; flex-direction: column; align-items: center; gap: 10px; animation: fadeIn 1.2s forwards; }
+        h2 { font-family: 'Pacifico', cursive; color: var(--pink-bold); font-size: 1.8rem; margin-bottom: 10px; }
+        .clue { font-size: 0.9rem; color: #884d56; font-weight: 600; margin-bottom: 5px; }
+        input#passInput { 
+            padding: 14px; border-radius: 25px; border: 2px solid var(--pink-soft); 
+            text-align: center; width: 85%; outline: none; font-size: 1rem; color: #555;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* CONTENT AREA */
+        #content-area { display: none; width: 100%; flex-direction: column; align-items: center; animation: fadeIn 1s forwards; }
+        .gif-area { 
+            width: 220px; height: 220px; border-radius: 30px; overflow: hidden; 
+            margin-bottom: 20px; background: white; border: 5px solid white;
+            box-shadow: 0 15px 35px rgba(208, 46, 119, 0.1);
+        }
+        .gif-area img { width: 100%; height: 100%; object-fit: cover; }
+        .text-area { min-height: 100px; font-weight: 600; font-size: 1.1rem; padding: 0 15px; line-height: 1.5; color: #4a4a4a; }
+
+        .btn-pink { 
+            background: linear-gradient(45deg, #ff69b4, #d02e77); 
+            color: white; border: none; padding: 12px 30px; border-radius: 25px; 
+            font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(208, 46, 119, 0.3);
+        }
+        #btn-tolak { position: absolute; background: #adb5bd; transition: 0.15s; white-space: nowrap; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="envelope" class="envelope-wrapper"></div>
+
+        <div id="password-gate">
+            <h2>Hayo Siapa?</h2>
+            <p class="clue">Nama kontak ta di HP ku apa?</p>
+            <input type="text" id="passInput" placeholder="Ketik di sini...">
+            <button class="btn-pink" onclick="checkPass()">Buka Surat</button>
+            <p id="error-msg" style="color: var(--pink-bold); display: none; font-size: 0.8rem; margin-top: 10px; font-weight: bold;">Masa lupa? Coba ingat lagi...</p>
+        </div>
+
+        <div id="content-area">
+            <div class="gif-area"><img id="main-gif" src="" alt="GIF"></div>
+            <div class="text-area" id="typewriter"></div>
+            <div style="position: relative; width: 100%; height: 120px; margin-top: 10px;">
+                <button id="btn-lanjut" class="btn-pink" onclick="nextSlide()">Lanjut</button>
+                <button id="btn-tolak" class="btn-pink" style="display: none;" onmouseover="moveButton()" onclick="moveButton()">Tolak</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
