@@ -1,4 +1,4 @@
-const SPEED_ONLOAD = 1
+const SPEED_ONLOAD = 3000
 
 window.onload = () => {
   const env = document.getElementById('envelope');
@@ -36,7 +36,7 @@ const slides = [
 ];
 
 let currentSlide = 0;
-const speedTyping = 1
+const speedTyping = 30
 
 function checkPass() {
   const input = document.getElementById('passInput').value.toLowerCase().trim();
@@ -115,7 +115,7 @@ function nextSlide() {
     const btnLanjut = document.getElementById('btn-lanjut');
     const btnTolak = document.getElementById('btn-tolak');
 
-    const finalText = "Akhir kata, thanks for reading this. \nMinta tlong terima hadiahku nah. Soal kemarin, I’m really sorry once again. \n\nSaya hrp sampai di slide ini, \n\nIncess tdk merasa 'minus' lagi sebagai perempuan. You are worth it🩷 .\nsmoga ini awal hal baik untuk kita berduanah, wkwkwk.\nTadi pas di perjalanannnah, jujur senang sekalika sampai ke bulkum tampa bantuan orang lain.\n\nSee you when I see you, Princess👸🏻. \nApapun keputusanta nantinya, ku terima semuaji. Saya mengerti keadaanta dan traumata yg pernah di cerita itu hari. \nMungkin ini terlalu cepat bagi kita toh? \nI won't talk too much, I'll just prove it to you👋🏻 \nBye-bye Incess, stay healthy! 🥤 dan ttp jadi Incess yg prtma kali ku kenal nah.";
+    const finalText = "Akhir kata, thanks for reading this. \nMinta tlong terima hadiahku nah. Soal kemarin, I’m really sorry once again. \n\nSaya hrp sampai di slide ini, \n\nIncess tdk merasa 'minus' lagi sebagai perempuan. You are worth it🩷 .\nsmoga ini awal hal baik untuk kita berduanah, wkwkwk.\nTadi pas di perjalanannnah, jujur senang sekalika sampai ke bulkum tampa bantuan orang lain.\n\nSee you when I see you, Princess👸🏻. \n\nApapun keputusanta nantinya, ku terima semuaji. Saya mengerti keadaanta dan traumata yg pernah di cerita itu hari. \nMungkin ini terlalu cepat bagi kita toh? \nI won't talk too much, I'll just prove it to you👋🏻 \nBye-bye Incess, stay healthy! 🥤 dan ttp jadi Incess yg prtma kali ku kenal nah.";
 
     gifElem.src = "slide5.GIF";
     textElem.innerHTML = "";
