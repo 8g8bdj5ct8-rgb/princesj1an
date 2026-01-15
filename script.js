@@ -1,3 +1,4 @@
+// Main Script
 const SPEED_ONLOAD = 3000
 
 window.onload = () => {
