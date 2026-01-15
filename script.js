@@ -1,85 +1,65 @@
-window.onload = () => {
-    const env = document.getElementById('envelope');
-    const gate = document.getElementById('password-gate');
-    setTimeout(() => {
-        env.classList.add('open');
-        setTimeout(() => {
-            env.classList.add('fade-out');
-            setTimeout(() => {
-                env.style.display = 'none';
-                gate.style.display = 'flex';
-            }, 1000);
-        }, 3000);
-    }, 1000);
-};
-
 const slides = [
-    { text: "Jujur, cari alamat pondokmu kemarin itu tidak mudah. Harus mutar-mutar tanya sana-sini. Tapi niat saya memang mau antar amanah ini sendiri.", gif: "slide1.GIF" },
-    { text: "Berhenti bilang kalau kamu itu 'banyak minusnya'. Di mata saya, kamu tetap Princes yang berharga. Tolong jangan rendah diri lagi, ya?", gif: "slide2.GIF" },
-    { text: "Karena bagiku, bisa mengenalmu dan mengantar amanah ini sampai ke tanganmu sudah jadi kebahagiaan tersendiri buat saya.", gif: "slide3.GIF" },
-    { text: "Ini ada sedikit kenang-kenangan, sebuah Tumbler. Bukan sogokan, tapi apresiasi saya buat kamu. Mau diterima, kan?", gif: "slide4.GIF", isLast: true }
+    { 
+        text: "I know I made a mistake, and I'm truly sorry. But please, stop saying you're not worth it. For me, every kilometer from Barru to Bulukumba is proof that you ARE.", 
+        gif: "slide1.GIF" 
+    },
+    { 
+        text: "You see 'flaws', but I see the 'little things' that make you special. Your childish side, your energy... I cherish all of them. ✨", 
+        gif: "slide2.GIF" 
+    },
+    { 
+        text: "I didn't make this code and travel this far to pressure you. I did it because I'm hooked on you, and I'm not going anywhere.", 
+        gif: "slide3.GIF" 
+    },
+    { 
+        text: "This Tumbler is a symbol that I'll stay. No matter the distance, no matter the ultimatum. So... will you accept it, Princes? 😊", 
+        gif: "slide4.GIF", 
+        isLast: true 
+    }
 ];
 
 let currentSlide = 0;
 
 function checkPass() {
     const input = document.getElementById('passInput').value.toLowerCase().trim();
-    if (input === 'princes') {
+    
+    // Sesuaikan password dengan nama kontak dia di HP Bos
+    if (input === 'princes') { 
+        const audio = document.getElementById('myAudio');
+        
+        // Karena file sudah di-edit ke detik 48, langsung play dari awal file
+        audio.play().catch(e => {
+            console.log("Browser block autoplay, but button click should fix it.");
+        });
+
         document.getElementById('password-gate').style.display = 'none';
         document.getElementById('content-area').style.display = 'flex';
         showSlide();
     } else {
-        alert("Masa lupa? Coba ingat lagi...");
+        alert("Incorrect password, Princes! Try again? 😜");
     }
 }
 
 function showSlide() {
     const slide = slides[currentSlide];
-    const textElem = document.getElementById('typewriter');
-    const gifElem = document.getElementById('main-gif');
-    gifElem.src = slide.gif;
-    textElem.innerHTML = "";
-    let i = 0;
-    function type() {
-        if (i < slide.text.length) {
-            textElem.innerHTML += slide.text.charAt(i);
-            i++;
-            setTimeout(type, 45); 
-        } else if (slide.isLast) {
-            document.getElementById('btn-tolak').style.display = 'inline-block';
-            document.getElementById('btn-lanjut').innerHTML = "Terima";
-        }
+    document.getElementById('slide-text').innerText = slide.text;
+    document.getElementById('slide-gif').src = slide.gif;
+
+    const nextBtn = document.getElementById('nextBtn');
+    if (slide.isLast) {
+        nextBtn.innerText = "Accept & Forgive? ❤️";
+        nextBtn.onclick = () => {
+            alert("Thank you for choosing to stay. See you in Bulukumba! ✨");
+        };
+    } else {
+        nextBtn.innerText = "Next ➜";
+        nextBtn.onclick = nextSlide;
     }
-    type();
 }
 
 function nextSlide() {
     if (currentSlide < slides.length - 1) {
         currentSlide++;
         showSlide();
-    } else {
-        const textElem = document.getElementById('typewriter');
-        const gifElem = document.getElementById('main-gif');
-        const btnLanjut = document.getElementById('btn-lanjut');
-        const btnTolak = document.getElementById('btn-tolak');
-
-        textElem.innerHTML = "Amanah lunas. Jaga kesehatan baik-baik di sana. Saya balik ke Barru dulu. Take care, Princes.";
-        gifElem.src = "slide5.GIF";
-        btnLanjut.style.display = "none";
-        btnTolak.style.display = "none";
-
-        setTimeout(() => {
-            alert("Amanah lunas. Jaga kesehatan baik-baik di sana. Saya balik ke Barru dulu. Take care, Princes.");
-        }, 500);
     }
-}
-
-function moveButton() {
-    const btn = document.getElementById('btn-tolak');
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 150);
-    btn.style.position = 'fixed';
-    btn.style.left = x + 'px';
-    btn.style.top = y + 'px';
-    btn.style.zIndex = "999";
 }
